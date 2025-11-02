@@ -47,22 +47,27 @@
         height: 40px;
         display: inline-block;
       }
+   body{
+    display: flex;
+    flex-direction: column;
+   }
      
       
     </style>
+       <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <link
     rel="stylesheet"
     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
   />
   <body>
-     <div class="start" style="display: block;justify-content: center;">
-      <button id="startGame">start</button>
-    </div>
+    
+      <button id="startGame" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-32 h-12 rounded  mt-100">start</button>
+ 
     <div class="container quiz-container">
       <div class="quiz-header">
-        <h2 id="h2">MCQ Quiz</h2>
-        <p id="question">Answer the following questions:</p>
+        <h2 id="h2" class="color-red">MCQ Quiz</h2>
+        <p id="question" >Answer the following questions:</p>
         
       </div>
 
