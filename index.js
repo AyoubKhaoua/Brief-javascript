@@ -38,11 +38,12 @@ let listOption = document.querySelector("list-group");
 let currentQuestion = 0;
 btnStart.addEventListener("click", (e) => {
   e.preventDefault();
+  currentQuestion = 0;
   startQuiz(currentQuestion);
 });
 function startQuiz(index) {
   let reponsesHtml = "";
-
+  currentQuestion = index;
   const element = Questions[index];
   question.innerHTML = element.question;
 
@@ -58,12 +59,25 @@ function startQuiz(index) {
       <div>
         <button id="previous-button" class="btn btn-primary mt-3" ${
           index === 0 ? "disabled" : ""
-        }>Previous</button>
+        } onclick="PrevQ(${index})">Previous</button>
         <button id="next-button" class="btn btn-primary mt-3" ${
           index === Questions.length - 1 ? "disabled" : ""
-        }>Next Question</button>
+        } onclick="NextQ(${index})" >Next Question</button>
       </div>
     `;
 
   reponse.innerHTML = reponsesHtml;
+}
+
+function NextQ(index) {
+  if (index < Questions.length - 1) {
+    index++;
+    startQuiz(index);
+  }
+}
+function PrevQ(index) {
+  if (index > 0) {
+    index--;
+    startQuiz(index);
+  }
 }
