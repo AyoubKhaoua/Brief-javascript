@@ -33,7 +33,10 @@ let btnNext = document.getElementById("next-button");
 let btnPrivious = document.getElementById("privious-button");
 let btnStart = document.getElementById("startGame");
 let listOption = document.querySelector("list-group");
-
+let input = document.getElementsByName("option");
+/* let scoreInput = document.getElementById("score");
+ */ let h2 = document.getElementById("h2");
+console.log(h2);
 //event listener
 let currentQuestion = 0;
 btnStart.addEventListener("click", (e) => {
@@ -44,6 +47,7 @@ btnStart.addEventListener("click", (e) => {
 function startQuiz(index) {
   let reponsesHtml = "";
   currentQuestion = index;
+  Result(index);
   const element = Questions[index];
   question.innerHTML = element.question;
 
@@ -61,8 +65,8 @@ function startQuiz(index) {
           index === 0 ? "disabled" : ""
         } onclick="PrevQ(${index})">Previous</button>
         <button id="next-button" class="btn btn-primary mt-3" ${
-          index === Questions.length - 1 ? "disabled" : ""
-        } onclick="NextQ(${index})" >Next Question</button>
+          index === Questions.length ? "disabled" : ""
+        } onclick="Checked(${index})" >Next Question</button>
       </div>
     `;
 
@@ -70,7 +74,7 @@ function startQuiz(index) {
 }
 
 function NextQ(index) {
-  if (index < Questions.length - 1) {
+  if (index < Questions.length) {
     index++;
     startQuiz(index);
   }
@@ -81,3 +85,46 @@ function PrevQ(index) {
     startQuiz(index);
   }
 }
+//function checked
+
+function Checked(index) {
+  for (let i = 1; i < input.length; i++) {
+    if (input[i].checked) {
+      Score(index);
+      NextQ(index);
+
+      /* Score(index); */
+      //console.log(Questions[index].answer);
+    }
+  }
+}
+
+//create elemnt for pirnt the score
+let div = document.createElement("strong");
+//afiche le score
+let score = 0;
+function Score(index) {
+  for (let i = 0; i < input.length; i++) {
+    if (input[i].checked) {
+      if (input[i].value === Questions[index].answer) {
+        score += 1;
+        /* scoreInput.textContent = `${score}`; */
+      }
+      break;
+    }
+  }
+}
+//result
+function Result(index) {
+  if (index === Questions.length) {
+    reponse.remove();
+    question.remove();
+    h2.textContent = `You're score is ${score}/4`;
+  }
+}
+/* for (let i = 1; i < 5; i++) {
+    if (input[i].checked.value === Questions[index].answer) {
+      score += 10;
+      console.log(score);
+    }
+  } */
